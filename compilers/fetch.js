@@ -1,3 +1,4 @@
+const fs = require('fs')
 const Octokit = require('@octokit/rest').Octokit
 const octokit = new Octokit({
   auth: process.env.DLB_AUTH_TOKEN
@@ -9,19 +10,41 @@ const actions = {
       org: 'digital-land',
       type: 'public'
     }).then(data => Promise.all(data.map(async repository => {
-      const workflows = await octokit.actions.listRepoWorkflowRuns({
+      repository.readme = await octokit.repos.getReadme({
+        owner: repository.owner.login,
+        repo: repository.name
+      }).catch(error => {
+        if (error.status === 404) {
+          return null
+        }
+      })
+
+      repository.license = await octokit.licenses.getForRepo({
+        owner: repository.owner.login,
+        repo: repository.name
+      }).catch(error => {
+        if (error.status === 404) {
+          return null
+        }
+      })
+
+      repository.workflow_files = await octokit.repos.getContents({
+        owner: repository.owner.login,
+        repo: repository.name,
+        path: '.github/workflows'
+      }).catch(error => {
+        if (error.status === 404) {
+          return null
+        }
+      })
+
+      repository.workflows = await octokit.actions.listRepoWorkflowRuns({
         owner: repository.owner.login,
         repo: repository.name
       })
 
-      return {
-        name: repository.name,
-        workflows: workflows.data
-      }
-    }))).then(data => {
-      const fs = require('fs')
-      return fs.writeFileSync('./dashboard.json', JSON.stringify(data))
-    })
+      return repository
+    }))).then(data => fs.writeFileSync('./dashboard.json', JSON.stringify(data)))
   }
 };
 
