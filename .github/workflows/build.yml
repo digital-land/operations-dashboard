@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: true
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
@@ -35,4 +37,4 @@ jobs:
     - name: Commit files
       run: |
         git add docs
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Build content-operations-dashboard for $(date +%F)"; git push origin master)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Build operations-dashboard"; git push origin master)
