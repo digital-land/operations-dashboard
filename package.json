@@ -1,0 +1,19 @@
+{
+  "name": "operations-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fetch": "node compilers/fetch.js",
+    "prestart": "node ./compilers/dashboard.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^17.9.1",
+    "express": "^4.17.1",
+    "content-frontend": "file:content-frontend"
+  }
+}

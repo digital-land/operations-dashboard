@@ -1,0 +1,3 @@
+[submodule "content-frontend"]
+	path = content-frontend
+	url = https://github.com/digital-land/content-frontend.git
