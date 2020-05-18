@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Octokit = require('@octokit/rest').Octokit
 const octokit = new Octokit({
-  auth: process.env.DLB_AUTH_TOKEN
+  auth: process.env.DLB_BOT_TOKEN
 })
 
 const actions = {

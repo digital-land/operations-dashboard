@@ -25,4 +25,4 @@ To run it locally, run: `npm run start`
 This will expose the `/docs` subdirectory to `localhost:8080/operations-dashboard`.
 
 ## Updating the cached results
-To update the cached results, run `DLB_AUTH_TOKEN=YourAccessToken npm run fetch` to fetch the latest data from the GitHub API.
+To update the cached results, run `DLB_BOT_TOKEN=YourAccessToken npm run fetch` to fetch the latest data from the GitHub API.
