@@ -29,6 +29,11 @@ const actions = {
         tagClass = 'govuk-tag--red'
       }
 
+      if (item.conclusion === null && item.status === 'in_progress') {
+        tagClass = 'govuk-tag--yellow'
+        item.conclusion = 'In Progress'
+      }
+
       return [{
         html: actions.link(item.html_url, item.id)
       }, {
