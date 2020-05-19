@@ -4,6 +4,8 @@ const puppeteer = require('puppeteer')
 
 const actions = {
   async start () {
+    fs.mkdirSync('./docs/screenshots', { recursive: true })
+
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
