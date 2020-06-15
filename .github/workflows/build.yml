@@ -23,7 +23,7 @@ jobs:
         submodules: true
     - uses: actions/setup-node@v2-beta
       with:
-        node-version: '12.x'
+        node-version: '14.x'
     - name: Setup git
       run: |
         git config user.email "${DLB_BOT_EMAIL}"
