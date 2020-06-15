@@ -34,7 +34,7 @@ const actions = {
       // Get files for a workflow
       const workflowOptions = defaultOptions
       workflowOptions.path = '.github/workflows'
-      repository.workflow_files = await octokit.repos.getContents(workflowOptions).catch(error => {
+      repository.workflow_files = await octokit.repos.getContent(workflowOptions).catch(error => {
         if (error.status !== 404) {
           console.log(error)
         }
@@ -43,7 +43,7 @@ const actions = {
       delete workflowOptions.path
 
       // Get workflows
-      repository.workflows = await octokit.actions.listRepoWorkflowRuns(defaultOptions).catch(error => {
+      repository.workflows = await octokit.actions.listWorkflowRunsForRepo(defaultOptions).catch(error => {
         if (error.status !== 404) {
           console.log(error)
         }
@@ -69,7 +69,7 @@ const actions = {
           pagesOptions.path = repository.pages.data.source.path
         }
 
-        repository.pages_files = await octokit.repos.getContents(pagesOptions).catch(error => {
+        repository.pages_files = await octokit.repos.getContent(pagesOptions).catch(error => {
           if (error.status !== 200) {
             console.log('pages_files', error)
             console.log('options', pagesOptions)
